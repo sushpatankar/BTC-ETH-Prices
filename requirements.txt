@@ -3,5 +3,3 @@ pandas
 ccxt
 streamlit_autorefresh
 plotly
-pystan
-fbprophet
