@@ -205,7 +205,7 @@ plot_raw_data()
 # fig1 = plot_plotly(m, forecast)
 
 
-st.plotly_chart(fig1)
+# st.plotly_chart(fig1)
 
 
 
