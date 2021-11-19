@@ -4,3 +4,4 @@ pandas
 ccxt
 streamlit_autorefresh
 plotly
+fbprophet
