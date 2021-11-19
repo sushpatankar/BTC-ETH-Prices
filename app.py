@@ -8,8 +8,8 @@ import os
 from random import randint
 from streamlit_autorefresh import st_autorefresh
 
-from fbprophet import Prophet
-from fbprophet.plot import plot_plotly
+# from fbprophet import Prophet
+# from fbprophet.plot import plot_plotly
 from plotly import graph_objs as go
 
 START = "2015-01-01"
@@ -183,26 +183,26 @@ plot_raw_data()
 
 
 # Predict forecast with Prophet.
-df_train = data[['Date','Close']]
-df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
+# df_train = data[['Date','Close']]
+# df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
-m = Prophet(
-		changepoint_range=0.8, # percentage of dataset to train on
-		yearly_seasonality='auto', # taking yearly seasonality into account
-		weekly_seasonality='auto', # taking weekly seasonality into account
-		daily_seasonality=False, # taking daily seasonality into account
-		seasonality_mode='multiplicative' # additive (for more linear data) or multiplicative seasonality (for more non-linear data)
-	)
+# m = Prophet(
+# 		changepoint_range=0.8, # percentage of dataset to train on
+# 		yearly_seasonality='auto', # taking yearly seasonality into account
+# 		weekly_seasonality='auto', # taking weekly seasonality into account
+# 		daily_seasonality=False, # taking daily seasonality into account
+# 		seasonality_mode='multiplicative' # additive (for more linear data) or multiplicative seasonality (for more non-linear data)
+# 	)
 
-m.fit(df_train)
+# m.fit(df_train)
 
-### Predict using the model
-future = m.make_future_dataframe(periods=365)
-forecast = m.predict(future)
+# ### Predict using the model
+# future = m.make_future_dataframe(periods=365)
+# forecast = m.predict(future)
 
     
-st.header(f'Forecast plot for 365 days')
-fig1 = plot_plotly(m, forecast)
+# st.header(f'Forecast plot for 365 days')
+# fig1 = plot_plotly(m, forecast)
 
 
 st.plotly_chart(fig1)
