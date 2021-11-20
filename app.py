@@ -4,12 +4,13 @@ import pandas as pd
 import yfinance as yf
 import ccxt
 import os
+from numpy import loadtxt
 
 from random import randint
 from streamlit_autorefresh import st_autorefresh
 
-# from fbprophet import Prophet
-# from fbprophet.plot import plot_plotly
+from fbprophet import Prophet
+from fbprophet.plot import plot_plotly
 from plotly import graph_objs as go
 
 START = "2015-01-01"
@@ -142,9 +143,10 @@ if selected_stock == 'BTC-USD':
         negSellPrice = sellPrice - sellPrice * 0.01
         
         col15,col16 = st.columns(2)
-	
-	col15.metric(f'We suggest to sell {selected_stock} at high of that you have bought',str(round(posSellPrice,2)))
-	col16.metric(f'We suggest to sell  {selected_stock} at high of that you have bought',str(round(negSellPrice,2)))
+        col15.metric(f'We suggest to sell {selected_stock} at high of that you have bought',str(round(posSellPrice,2)))
+        col16.metric(f'We suggest to sell  {selected_stock} at high of that you have bought',str(round(negSellPrice,2)))
+        
+
 
 else:
     if is_non_zero_file('ethBuy.txt'):
@@ -167,8 +169,37 @@ else:
         col15.metric(f'We suggest to sell {selected_stock} when it crosses',str(posSellPrice))
         col16.metric(f'We suggest to sell  {selected_stock} before',str(negSellPrice))
         
-
-    
+if sell:
+    if selected_stock == 'BTC-USD':
+        if kraken_ticker['bid'] > binance_ticker['bid']:
+            with open('btcSell.txt', "w+") as myfile:
+                myfile.write(str(kraken_bid))
+                myfile.write(' on Kraken.')
+            with open('btcBuy.txt', "w+") as myfile:
+                myfile.truncate(0)
+            sellPrice = kraken_bid
+        else:
+            with open('btcSell.txt', "w") as myfile:
+                myfile.write(str(binance_bid))
+                myfile.write(' from Binance')
+            with open('etcBuy.txt', "w+") as myfile:
+                myfile.truncate(0)
+            sellPrice = binance_bid
+    else:
+        if kraken_ticker['bid'] > binance_ticker['bid']:
+            with open('ethSell.txt', "w") as myfile:
+                myfile.write(str(kraken_bid))
+                myfile.write(' on Kraken.')
+            with open('btcBuy.txt', "w+") as myfile:
+                myfile.truncate(0)
+            sellPrice = kraken_bid
+        else:
+            with open('ethSell.txt', "w") as myfile:
+                myfile.write(str(binance_bid))
+                myfile.write(' from Binance')
+            with open('etcBuy.txt', "w+") as myfile:
+                myfile.truncate(0)
+            sellPrice = binance_bid
 
 def plot_raw_data():
 	fig = go.Figure()
@@ -182,29 +213,29 @@ plot_raw_data()
 
 
 # Predict forecast with Prophet.
-# df_train = data[['Date','Close']]
-# df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
+df_train = data[['Date','Close']]
+df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
-# m = Prophet(
-# 		changepoint_range=0.8, # percentage of dataset to train on
-# 		yearly_seasonality='auto', # taking yearly seasonality into account
-# 		weekly_seasonality='auto', # taking weekly seasonality into account
-# 		daily_seasonality=False, # taking daily seasonality into account
-# 		seasonality_mode='multiplicative' # additive (for more linear data) or multiplicative seasonality (for more non-linear data)
-# 	)
+m = Prophet(
+		changepoint_range=0.8, # percentage of dataset to train on
+		yearly_seasonality='auto', # taking yearly seasonality into account
+		weekly_seasonality='auto', # taking weekly seasonality into account
+		daily_seasonality=False, # taking daily seasonality into account
+		seasonality_mode='multiplicative' # additive (for more linear data) or multiplicative seasonality (for more non-linear data)
+	)
 
-# m.fit(df_train)
+m.fit(df_train)
 
-# ### Predict using the model
-# future = m.make_future_dataframe(periods=365)
-# forecast = m.predict(future)
+### Predict using the model
+future = m.make_future_dataframe(periods=365)
+forecast = m.predict(future)
 
     
-# st.header(f'Forecast plot for 365 days')
-# fig1 = plot_plotly(m, forecast)
+st.header(f'Forecast plot for 365 days')
+fig1 = plot_plotly(m, forecast)
 
 
-# st.plotly_chart(fig1)
+st.plotly_chart(fig1)
 
 
 
