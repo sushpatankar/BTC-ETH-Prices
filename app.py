@@ -174,26 +174,26 @@ if sell:
             with open('btcSell.txt', "w+") as myfile:
                 myfile.write(str(kraken_bid))
                 myfile.write(' on Kraken.')
-            os.remove('btcBuy.txt)
+            os.remove('btcBuy.txt')
             sellPrice = kraken_bid
         else:
             with open('btcSell.txt', "w") as myfile:
                 myfile.write(str(binance_bid))
                 myfile.write(' from Binance')
-            os.remove('btcBuy.txt)
+            os.remove('btcBuy.txt')
             sellPrice = binance_bid
     else:
         if kraken_ticker['bid'] > binance_ticker['bid']:
             with open('ethSell.txt', "w") as myfile:
                 myfile.write(str(kraken_bid))
                 myfile.write(' on Kraken.')
-            os.remove('ethBuy.txt)
+            os.remove('ethBuy.txt')
             sellPrice = kraken_bid
         else:
             with open('ethSell.txt', "w") as myfile:
                 myfile.write(str(binance_bid))
                 myfile.write(' from Binance')
-            os.remove('ethBuy.txt)
+            os.remove('ethBuy.txt')
             sellPrice = binance_bid
 
 def plot_raw_data():
