@@ -142,8 +142,9 @@ if selected_stock == 'BTC-USD':
         negSellPrice = sellPrice - sellPrice * 0.01
         
         col15,col16 = st.columns(2)
-        col15.metric(f'We suggest to sell {selected_stock} that you have bought when it crosses',str(round(posSellPrice,2)))
-        col16.metric(f'We suggest to sell  {selected_stock} that you have bought before',str(round(negSellPrice,2)))
+        
+	col15.metric(f'We suggest to sell {selected_stock} at high of that you have bought',str(round(posSellPrice,2)))
+        col16.metric(f'We suggest to sell  {selected_stock} at high of that you have bought',str(round(negSellPrice,2)))
         
 
 
