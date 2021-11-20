@@ -65,5 +65,5 @@ https://share.streamlit.io/sushpatankar/btc-eth-prices/main/app.py
 
 # Reference:
 
-[Data Professor Youtube](https://www.youtube.com/channel/UCV8e2g4IWQqK71bbzGDEI4Q)
-[CCTX Tutorial](https://www.youtube.com/watch?v=2Zdm2ISdm1Q)
+* [Data Professor Youtube](https://www.youtube.com/channel/UCV8e2g4IWQqK71bbzGDEI4Q)
+* [CCTX Tutorial](https://www.youtube.com/watch?v=2Zdm2ISdm1Q)
