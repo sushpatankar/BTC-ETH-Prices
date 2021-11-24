@@ -25,7 +25,7 @@ lower bound price will be $59,280. The lower bound is set so that you do suffer 
 * [Yahoo Finance](https://github.com/ranaroussi/yfinance)
 * [CCXT](https://github.com/ccxt/ccxt)
 * [fbprophet](https://facebook.github.io/prophet/)
-* Plotly(https://github.com/plotly/plotly.py)
+* [Plotly](https://github.com/plotly/plotly.py)
 
 # To run the web app on localhost
 
