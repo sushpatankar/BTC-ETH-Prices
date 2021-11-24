@@ -15,7 +15,7 @@ The app is hosted on Streamlit cloud. Currently, I'm working on hosting it on He
 ```text
 Note: Higher and lower bounded prices are the selling price of the crypto. For example, if you buy a BTC at $60,000
 the higher bound will be 61,200 i.e. you can sell crypto at 61,200 or any price higher than 61,200. The
-lower bound price will be $59,280. The lower bound is set so that you do suffer heavy loss. 
+lower bound price will be $59,280. The lower bound is set so that you do not suffer heavy loss. 
 ```
 
 # Tools:
